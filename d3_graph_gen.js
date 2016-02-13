@@ -4,7 +4,7 @@ var width = $(window).width(),
     height = $(window).height();
 
 	
-var color = d3.scale.category20();
+var color = d3.scale.category10();
 
 var force = d3.layout.force()
     .charge(-240)
@@ -25,7 +25,7 @@ var svg = d3.select("body").append("svg")
 
  function f(error, graph) {
   if (error) throw error;
-
+	d3.selectAll("svg > *").remove() //clear the SVG
   force
       .nodes(graph.nodes)
       .links(graph.links)
@@ -76,6 +76,7 @@ setInterval(function(){
 	var connected = []; 
 	
 	
+	console.log(society.nodes[0].links)
 	console.log(society.nodes);
 	console.log(illNodesIndex);
 	
