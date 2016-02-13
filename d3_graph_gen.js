@@ -4,7 +4,7 @@ var width = $(window).width(),
     height = $(window).height();
 
 	
-var color = d3.scale.category20();
+var color = d3.scale.category10();
 
 var force = d3.layout.force()
     .charge(-240)
