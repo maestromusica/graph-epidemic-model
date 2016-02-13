@@ -1,3 +1,5 @@
+"use strict";
+
 function gen_society(m0,m,n) {
 	var array = []; //array of edges
 	var deg = [];	//array of nodes' degrees
