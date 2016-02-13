@@ -76,11 +76,8 @@ setInterval(function(){
 	var connected = []; 
 	
 	
-<<<<<<< HEAD
 	console.log(society.nodes[0].links)
-=======
 	console.log(society.nodes);
->>>>>>> refs/remotes/maestromusica/master
 	console.log(illNodesIndex);
 	
 }, 3000);
