@@ -1,45 +1,7 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-.node {
-  stroke: #fff;
-  stroke-width: 1.5px;
-}
-
-.link {
-  stroke: #999;
-  stroke-opacity: .6;
-}
-
-body {
-	padding: -10px;
-}
-
-svg {
-	margin: -10px;
-}
-
-</style>
-<body>
-<<<<<<< HEAD
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="./gen_society.js"></script>
-=======
->>>>>>> refs/remotes/maestromusica/maestro-branch
-
-	<script src="http://d3js.org/d3.v3.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-	<script src="./gen_society.js"></script>
-	<script src="./d3_graph_gen.js"></script>
-
-<<<<<<< HEAD
-<script>
-
 console.log();	
 
-var width = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName.clientWidth,
-    height = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName.clientHeight;
+var width = $(window).width(),
+    height = $(window).height();
 
 var color = d3.scale.category20();
 
@@ -95,9 +57,5 @@ var svg = d3.select("body").append("svg")
         .attr("cy", function(d) { return d.y; });
   });
 }
-f(false, gen_society(5,2,100));
 
-</script>
-=======
-</body>
->>>>>>> refs/remotes/maestromusica/maestro-branch
+f(false, gen_society(5,2,100));
