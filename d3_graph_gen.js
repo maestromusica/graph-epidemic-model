@@ -6,7 +6,6 @@ var width = $(window).width(),
 	
 var color = d3.scale.category10();
 
-var illNodesIndex = [];
 var force = d3.layout.force()
     .charge(-240)
     .linkDistance(function(d) {
@@ -25,7 +24,6 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
  function f(error, graph) {
-	illNodesIndex=[];
   if (error) throw error;
 	d3.selectAll("svg > *").remove() //clear the SVG
   force
@@ -60,25 +58,45 @@ var svg = d3.select("body").append("svg")
     node.attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
   });
-	svg.selectAll(".node").on('dblclick' , function(d){ 
-		d3.select("#name" + d.index).attr("class", "node-ill");
-		illNodesIndex.push(d.index);
-	});
 }
 
 var society = gen_society(5,2,100);
 f(false, society);
 
 
+var illNodesIndex = [];
+var illNodesNe = [];
+
+svg.selectAll(".node").on('dblclick' , function(d){ 
+	d3.select("#name" + d.index).attr("class", "node-ill");
+	
+	illNodesIndex.push(d.index);
+	
+	var newNe = society.nodes[d.index].links;
+	for(var i=0; i<newNe.length; i++) {
+		illNodesNe.push(newNe[i]);
+	}
+});
 
 
 setInterval(function(){ 
 
-	var connected = []; 
+
+	console.log(illNodesNe);
 	
+	var newNe = [];
+	for(var i=illNodesNe.length; i>=0; i--) {
+		d3.select("#name" + illNodesNe[illNodesNe.length - 1]).attr("class", "node-ill");
+		
+		console.log(illNodesNe[illNodesNe.length - 1]);
+		if(illNodesNe.length > 0) {
+			newNe = society.nodes[illNodesNe[illNodesNe.length - 1]].links;
+		}
+		
+		illNodesNe.pop();
+	}
+	for(var i=0; i<newNe.length; i++) {
+		illNodesNe.push(newNe[i]);
+	}
 	
-	console.log(society.nodes[0].links)
-	console.log(society.nodes);
-	console.log(illNodesIndex);
-	
-}, 3000);
+}, 1000);
