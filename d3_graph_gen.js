@@ -60,7 +60,7 @@ var svg = d3.select("body").append("svg")
   });
 }
 
-var society = gen_society(5,1,100);
+var society = gen_society(5,2,100);
 f(false, society);
 
 
@@ -81,19 +81,6 @@ setInterval(function(){
 		for (var j=0; j<current.links.length;++j) {
 			if (newIllNodes.indexOf(current.links[j])==-1)
 				newIllNodes.push(current.links[j]);
-
-setInterval(function(){ 
-
-
-	console.log(illNodesNe);
-	
-	var newNe = [];
-	for(var i=illNodesNe.length; i>=0; i--) {
-		d3.select("#name" + illNodesNe[illNodesNe.length - 1]).attr("class", "node-ill");
-		
-		console.log(illNodesNe[illNodesNe.length - 1]);
-		if(illNodesNe.length > 0) {
-			newNe.push(society.nodes[illNodesNe[illNodesNe.length - 1]].links);
 		}
 	}
 	for (var i=0;i<newIllNodes.length;++i)
