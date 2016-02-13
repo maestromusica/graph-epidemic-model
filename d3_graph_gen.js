@@ -1,8 +1,7 @@
-console.log();	
-
 var width = $(window).width(),
     height = $(window).height();
 
+	
 var color = d3.scale.category20();
 
 var force = d3.layout.force()
@@ -42,6 +41,7 @@ var svg = d3.select("body").append("svg")
       .attr("class", "node")
       .attr("r", 8)
       .style("fill", function(d) { return color(d.group); })
+	  .attr('id', function(d){ return 'name' + d.index; })
       .call(force.drag);
 
   node.append("title")
@@ -59,3 +59,15 @@ var svg = d3.select("body").append("svg")
 }
 
 f(false, gen_society(5,2,100));
+
+
+
+svg.selectAll(".node").on('click' , function(d){ 
+	console.log();
+	d3.select("#name" + d.index).attr("class", "node-ill");
+	console.log(d);
+});
+
+
+
+
