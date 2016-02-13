@@ -65,7 +65,7 @@ f(false, society);
 
 
 var illNodesIndex = [];
-svg.selectAll(".node").on('click' , function(d){ 
+svg.selectAll(".node").on('dblclick' , function(d){ 
 	d3.select("#name" + d.index).attr("class", "node-ill");
 	illNodesIndex.push(d.index);
 });
@@ -73,10 +73,14 @@ svg.selectAll(".node").on('click' , function(d){
 
 setInterval(function(){ 
 
-	var sadziedzi = []; 
+	var connected = []; 
 	
 	
+<<<<<<< HEAD
 	console.log(society.nodes[0].links)
+=======
+	console.log(society.nodes);
+>>>>>>> refs/remotes/maestromusica/master
 	console.log(illNodesIndex);
 	
 }, 3000);
