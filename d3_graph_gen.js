@@ -60,24 +60,27 @@ var svg = d3.select("body").append("svg")
   });
 }
 
-var society = gen_society(5,2,100);
+var society = gen_society(5,1,100);
 f(false, society);
 
 
 var illNodesIndex = [];
-var illNodesNe = [];
+
 
 svg.selectAll(".node").on('dblclick' , function(d){ 
 	d3.select("#name" + d.index).attr("class", "node-ill");
 	
 	illNodesIndex.push(d.index);
-	
-	var newNe = society.nodes[d.index].links;
-	for(var i=0; i<newNe.length; i++) {
-		illNodesNe.push(newNe[i]);
-	}
 });
 
+setInterval(function(){
+	var newIllNodes=illNodesIndex.slice();
+	for (var i=0;i<illNodesIndex.length;++i) {
+		//for every neighbour
+		var current = society.nodes[illNodesIndex[i]];
+		for (var j=0; j<current.links.length;++j) {
+			if (newIllNodes.indexOf(current.links[j])==-1)
+				newIllNodes.push(current.links[j]);
 
 setInterval(function(){ 
 
@@ -92,11 +95,9 @@ setInterval(function(){
 		if(illNodesNe.length > 0) {
 			newNe.push(society.nodes[illNodesNe[illNodesNe.length - 1]].links);
 		}
-		
-		illNodesNe.pop();
 	}
-	for(var i=0; i<newNe.length; i++) {
-		illNodesNe.push(newNe[i]);
-	}
-	
+	for (var i=0;i<newIllNodes.length;++i)
+		d3.select("#name" + newIllNodes[i]).attr("class", "node-ill");
+	illNodesIndex=newIllNodes;
 }, 1000);
+
