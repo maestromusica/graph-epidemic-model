@@ -1,8 +1,9 @@
-console.log();	
+"use strict";
 
 var width = $(window).width(),
     height = $(window).height();
 
+	
 var color = d3.scale.category20();
 
 var force = d3.layout.force()
@@ -42,6 +43,7 @@ var svg = d3.select("body").append("svg")
       .attr("class", "node")
       .attr("r", 8)
       .style("fill", function(d) { return color(d.group); })
+	  .attr('id', function(d){ return 'name' + d.index; })
       .call(force.drag);
 
   node.append("title")
@@ -58,4 +60,27 @@ var svg = d3.select("body").append("svg")
   });
 }
 
-f(false, gen_society(5,2,100));
+var society = gen_society(5,2,100);
+f(false, society);
+
+
+var illNodesIndex = [];
+svg.selectAll(".node").on('click' , function(d){ 
+	d3.select("#name" + d.index).attr("class", "node-ill");
+	illNodesIndex.push(d.index);
+});
+
+
+setInterval(function(){ 
+
+	var sadziedzi = []; 
+	
+	for(var i=0; i<society.links.length; i++) {
+		//if(society.links)
+	}
+	
+	
+	//console.log(society.links);
+	console.log(illNodesIndex);
+	
+}, 3000);
