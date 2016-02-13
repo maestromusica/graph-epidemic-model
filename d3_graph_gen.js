@@ -6,6 +6,7 @@ var width = $(window).width(),
 	
 var color = d3.scale.category10();
 
+var illNodesIndex = [];
 var force = d3.layout.force()
     .charge(-240)
     .linkDistance(function(d) {
@@ -24,6 +25,7 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
  function f(error, graph) {
+	illNodesIndex=[];
   if (error) throw error;
 	d3.selectAll("svg > *").remove() //clear the SVG
   force
@@ -58,17 +60,16 @@ var svg = d3.select("body").append("svg")
     node.attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
   });
+	svg.selectAll(".node").on('dblclick' , function(d){ 
+		d3.select("#name" + d.index).attr("class", "node-ill");
+		illNodesIndex.push(d.index);
+	});
 }
 
 var society = gen_society(5,2,100);
 f(false, society);
 
 
-var illNodesIndex = [];
-svg.selectAll(".node").on('dblclick' , function(d){ 
-	d3.select("#name" + d.index).attr("class", "node-ill");
-	illNodesIndex.push(d.index);
-});
 
 
 setInterval(function(){ 
