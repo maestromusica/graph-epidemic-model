@@ -65,10 +65,8 @@ f(false, society);
 
 
 var illNodesIndex = [];
-<<<<<<< HEAD
 var illNodesNe = [];
-=======
->>>>>>> origin/maestro-branch
+
 svg.selectAll(".node").on('dblclick' , function(d){ 
 	d3.select("#name" + d.index).attr("class", "node-ill");
 	
@@ -83,7 +81,7 @@ svg.selectAll(".node").on('dblclick' , function(d){
 
 setInterval(function(){ 
 
-<<<<<<< HEAD
+
 	console.log(illNodesNe);
 	
 	var newNe = [];
@@ -91,21 +89,14 @@ setInterval(function(){
 		d3.select("#name" + illNodesNe[illNodesNe.length - 1]).attr("class", "node-ill");
 		
 		console.log(illNodesNe[illNodesNe.length - 1]);
-		if(illNodesNe.length > 0)
+		if(illNodesNe.length > 0) {
 			newNe = society.nodes[illNodesNe[illNodesNe.length - 1]].links;
+		}
 		
 		illNodesNe.pop();
 	}
 	for(var i=0; i<newNe.length; i++) {
 		illNodesNe.push(newNe[i]);
 	}
-=======
-	var connected = []; 
 	
-	
-	console.log(society.nodes[0].links)
-	console.log(society.nodes);
-	console.log(illNodesIndex);
->>>>>>> origin/maestro-branch
-	
-}, 3000);
+}, 1000);
