@@ -71,11 +71,7 @@ var svg = d3.select("body").append("svg")
       .data(graph.nodes)
     .enter().append("circle")
       .attr("class", "node")
-<<<<<<< HEAD
-      .attr("r", 5)
-=======
       .attr("r", 8)
->>>>>>> origin/master
       .style("fill", function(d) { return color(d.group); })
       .call(force.drag);
 
