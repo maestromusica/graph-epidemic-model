@@ -25,7 +25,7 @@ var svg = d3.select("body").append("svg")
 
  function f(error, graph) {
   if (error) throw error;
-
+	d3.selectAll("svg > *").remove() //clear the SVG
   force
       .nodes(graph.nodes)
       .links(graph.links)
