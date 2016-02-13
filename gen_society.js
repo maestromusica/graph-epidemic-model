@@ -7,16 +7,19 @@ function gen_society(m0,m,n) {
 	var sum_deg = 0;
 	var i = 0;
 	for (;i<m0;++i) {
-		var node = {"name":"","group":0};;
+		var node = {"name":"","group":0,"links":[]};;
 		node.name="Patient "+i;
 		node.group=i;
-		nodes.push(node);
 		
 		deg[i]=0;
 		for (var j = 0; j<i;++j) {
 			var edge={"source":0,"target":0,"value":1};
 			edge.source=i;
 			edge.target=j;
+			
+				node.links.push(j);
+				nodes[j].links.push(i);
+
 			edge.value=1;
 			array.push(edge)
 			
@@ -24,13 +27,14 @@ function gen_society(m0,m,n) {
 			++deg[j];
 			sum_deg+=2;
 		}
+		
+		nodes.push(node);
 	}
 	//ordinary nodes with m edges
 	for (;i<n;++i) {
-		var node = {"name":"","group":0};;
+		var node = {"name":"","group":0,"links":[]};;
 		node.name="Patient "+i;
 		node.group=-1 //unset
-		nodes.push(node);
 	
 		deg[i]=0; //by the end of iteration should be m
 		var forbidden = [];
@@ -49,6 +53,10 @@ function gen_society(m0,m,n) {
 						var edge={"source":0,"target":0,"value":1};
 						edge.source=i;
 						edge.target=j;
+						
+							node.links.push(j);
+							nodes[j].links.push(i);
+						
 						if (node.group==nodes[j].group) edge.value=2; //close friends
 						else edge.value=1; //not close friends
 						
@@ -62,6 +70,8 @@ function gen_society(m0,m,n) {
 				sum+=deg[j];
 			}
 		}
+		
+		nodes.push(node);
 		sum_deg+=m;
 	}
 	var obj={};

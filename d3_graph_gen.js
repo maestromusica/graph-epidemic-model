@@ -1,3 +1,5 @@
+"use strict";
+
 var width = $(window).width(),
     height = $(window).height();
 
@@ -58,16 +60,27 @@ var svg = d3.select("body").append("svg")
   });
 }
 
-f(false, gen_society(5,2,100));
+var society = gen_society(5,2,100);
+f(false, society);
 
 
-
+var illNodesIndex = [];
 svg.selectAll(".node").on('click' , function(d){ 
-	console.log();
 	d3.select("#name" + d.index).attr("class", "node-ill");
-	console.log(d);
+	illNodesIndex.push(d.index);
 });
 
 
+setInterval(function(){ 
 
-
+	var sadziedzi = []; 
+	
+	for(var i=0; i<society.links.length; i++) {
+		//if(society.links)
+	}
+	
+	
+	//console.log(society.links);
+	console.log(illNodesIndex);
+	
+}, 3000);

@@ -1,37 +1,10 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<style>
-
-.node {
-  stroke: #fff;
-  stroke-width: 1.5px;
-}
-
-.node-ill {
-  stroke: #f00;
-  stroke-width: 3px;
-}
-
-
-.link {
-  stroke: #999;
-  stroke-opacity: .6;
-}
-
-body {
-	padding: -10px;
-}
-
-svg {
-	margin: -10px;
-}
-
-</style>
+<link rel="stylesheet" type="text/css" href="styles.css">
 <body>
-
-	<script src="http://d3js.org/d3.v3.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-	<script src="./gen_society.js"></script>
-	<script src="./d3_graph_gen.js"></script>
-
+<div class="form"> p = <input type="text" value="0.5" onchange="p=1-this.value" autocomplete="off" /></div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="./gen_society.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="./d3_graph_gen.js"></script>
 </body>
