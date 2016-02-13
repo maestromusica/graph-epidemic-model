@@ -4,7 +4,7 @@ var width = $(window).width(),
     height = $(window).height();
 
 	
-var color = d3.scale.category20();
+var color = d3.scale.category10();
 
 var force = d3.layout.force()
     .charge(-240)
@@ -25,7 +25,7 @@ var svg = d3.select("body").append("svg")
 
  function f(error, graph) {
   if (error) throw error;
-
+	d3.selectAll("svg > *").remove() //clear the SVG
   force
       .nodes(graph.nodes)
       .links(graph.links)
@@ -65,7 +65,10 @@ f(false, society);
 
 
 var illNodesIndex = [];
+<<<<<<< HEAD
 var illNodesNe = [];
+=======
+>>>>>>> origin/maestro-branch
 svg.selectAll(".node").on('dblclick' , function(d){ 
 	d3.select("#name" + d.index).attr("class", "node-ill");
 	
@@ -80,6 +83,7 @@ svg.selectAll(".node").on('dblclick' , function(d){
 
 setInterval(function(){ 
 
+<<<<<<< HEAD
 	console.log(illNodesNe);
 	
 	var newNe = [];
@@ -95,5 +99,13 @@ setInterval(function(){
 	for(var i=0; i<newNe.length; i++) {
 		illNodesNe.push(newNe[i]);
 	}
+=======
+	var connected = []; 
+	
+	
+	console.log(society.nodes[0].links)
+	console.log(society.nodes);
+	console.log(illNodesIndex);
+>>>>>>> origin/maestro-branch
 	
 }, 3000);

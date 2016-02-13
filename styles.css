@@ -24,13 +24,10 @@ svg {
 }
 
 .form {
-	position: absolute; padding: 2px; left: 0px; top: 0px; z-index: 1; 	background-color: #BBB; font-family: sans-serif; opacity:0.4
+	position: absolute; padding: 2px 4px; left: 0px; top: 0px; z-index: 1; 	background-color: #BBB; font-family: sans-serif; opacity:1;
 }
 .form input {
-	opacity: 0.5;
+	opacity: 1;
 	width: 70px;
 	text-align: right;
-}
-.form:hover {
-	opacity: 1.0
 }
