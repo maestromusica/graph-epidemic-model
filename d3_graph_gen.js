@@ -90,7 +90,7 @@ setInterval(function(){
 		
 		console.log(illNodesNe[illNodesNe.length - 1]);
 		if(illNodesNe.length > 0) {
-			newNe = society.nodes[illNodesNe[illNodesNe.length - 1]].links;
+			newNe.push(society.nodes[illNodesNe[illNodesNe.length - 1]].links);
 		}
 		
 		illNodesNe.pop();
