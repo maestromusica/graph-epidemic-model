@@ -12,9 +12,18 @@
   stroke-opacity: .6;
 }
 
+body {
+	padding: -10px;
+}
+
+svg {
+	margin: -10px;
+}
+
 </style>
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script>
 'use strict';
 function gen_society(m0,m,n) {
@@ -91,8 +100,10 @@ function gen_society(m0,m,n) {
 
 <script>
 
-var width = 1500,
-    height = 700;
+console.log();	
+
+var width = $(window).width(),
+    height = $(window).height();
 
 var color = d3.scale.category20();
 
