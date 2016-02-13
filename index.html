@@ -39,13 +39,13 @@ var color = d3.scale.category20();
 var force = d3.layout.force()
     .charge(-240)
     .linkDistance(function(d) {
-		if (d.value==2) return 30;
+		if (d.value==2) return 10;
 		else return 120;
 	})
     .size([width, height])
     .linkStrength(function(d) {
 		if (d.value==2) return 1.0;
-		else return 0.3;
+		else return 0.1;
 	});
 	
 
