@@ -23,7 +23,6 @@ svg {
 </style>
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="./gen_society.js"></script>
 
 
@@ -31,8 +30,8 @@ svg {
 
 console.log();	
 
-var width = $(window).width(),
-    height = $(window).height();
+var width = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName.clientWidth,
+    height = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName.clientHeight;
 
 var color = d3.scale.category20();
 
