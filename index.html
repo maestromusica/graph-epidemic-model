@@ -38,8 +38,16 @@ var color = d3.scale.category20();
 
 var force = d3.layout.force()
     .charge(-240)
-    .linkDistance(30)
-    .size([width, height]);
+    .linkDistance(function(d) {
+		if (d.value==2) return 30;
+		else return 120;
+	})
+    .size([width, height])
+    .linkStrength(function(d) {
+		if (d.value==2) return 1.0;
+		else return 0.3;
+	});
+	
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -80,7 +88,11 @@ var svg = d3.select("body").append("svg")
         .attr("cy", function(d) { return d.y; });
   });
 }
+<<<<<<< HEAD
 
 f(false, gen_society(5,3,500));
+=======
+f(false, gen_society(5,2,100));
+>>>>>>> origin/master
 
 </script>
