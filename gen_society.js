@@ -7,7 +7,7 @@ function gen_society(m0,m,n) {
 	for (;i<m0;++i) {
 		var node = {"name":"","group":0};;
 		node.name="Patient "+i;
-		node.group=Math.floor(Math.random()*10);
+		node.group=i;
 		nodes.push(node);
 		
 		deg[i]=0;
@@ -27,7 +27,7 @@ function gen_society(m0,m,n) {
 	for (;i<n;++i) {
 		var node = {"name":"","group":0};;
 		node.name="Patient "+i;
-		node.group=Math.floor(Math.random()*10);
+		node.group=-1 //unset
 		nodes.push(node);
 	
 		deg[i]=0; //by the end of iteration should be m
@@ -41,11 +41,14 @@ function gen_society(m0,m,n) {
 					if (forbidden.indexOf(j)==-1) {
 					
 						forbidden.push(j);
+						if (node.group==(-1)) node.group=nodes[j].group;
+						
 						
 						var edge={"source":0,"target":0,"value":1};
 						edge.source=i;
 						edge.target=j;
-						edge.value=1;
+						if (node.group==nodes[j].group) edge.value=2; //close friends
+						else edge.value=1; //not close friends
 						
 						array.push(edge)
 						++deg[i];
