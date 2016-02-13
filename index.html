@@ -24,78 +24,7 @@ svg {
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script>
-'use strict';
-function gen_society(m0,m,n) {
-	var array = []; //array of edges
-	var deg = [];	//array of nodes' degrees
-	var nodes = [];
-	var sum_deg = 0;
-	//INITIAL m0 nodes
-	var i = 0;
-	for (;i<m0;++i) {
-		var node = {}
-		node.name="Patient "+i;
-		node.group=Math.floor(Math.random()*10);
-		nodes.push(node);
-		
-		deg[i]=0;
-		for (var j = 0; j<i;++j) {
-			var edge={};
-			edge.source=i;
-			edge.target=j;
-			edge.value=1;
-			array.push(edge)
-			
-			++deg[i];
-			++deg[j];
-			sum_deg+=2;
-		}
-	}
-	//ordinary nodes with m edges
-	for (;i<n;++i) {
-		var node = {}
-		node.name="Patient "+i;
-		node.group=Math.floor(Math.random()*10);
-		nodes.push(node);
-	
-		deg[i]=0; //by the end of iteration should be m
-		var forbidden = [];
-		while (deg[i] < m) {
-			var r = Math.random()*sum_deg;
-			//weighted rand
-			var sum = 0;
-			for (var j = 0; j < i; ++j) {
-				if (r < sum+deg[j]) {
-					if (forbidden.indexOf(j)==-1) {
-					
-						forbidden.push(j);
-						
-						var edge={};
-						edge.source=i;
-						edge.target=j;
-						edge.value=1;
-						
-						array.push(edge)
-						++deg[i];
-						++deg[j];
-						sum_deg+=1;
-					}
-					break;
-				}
-				sum+=deg[j];
-			}
-		}
-		sum_deg+=m;
-	}
-	var obj={};
-	obj.nodes=nodes;
-	obj.links=array;
-	obj.deg=deg;
-	return obj;
-}
-//document.write(gen_society(4,4,10000)[0]);
-</script>
+<script src="./gen_society.js"></script>
 
 
 <script>
