@@ -75,12 +75,8 @@ setInterval(function(){
 
 	var connected = []; 
 	
-	for(var i=0; i<society.links.length; i++) {
-		//if(society.links)
-	}
 	
-	
-	console.log(society.links);
+	console.log(society.nodes);
 	console.log(illNodesIndex);
 	
 }, 3000);
