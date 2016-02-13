@@ -75,12 +75,8 @@ setInterval(function(){
 
 	var sadziedzi = []; 
 	
-	for(var i=0; i<society.links.length; i++) {
-		//if(society.links)
-	}
 	
-	
-	//console.log(society.links);
+	console.log(society.nodes[0].links)
 	console.log(illNodesIndex);
 	
 }, 3000);
