@@ -65,18 +65,35 @@ f(false, society);
 
 
 var illNodesIndex = [];
-svg.selectAll(".node").on('click' , function(d){ 
+var illNodesNe = [];
+svg.selectAll(".node").on('dblclick' , function(d){ 
 	d3.select("#name" + d.index).attr("class", "node-ill");
+	
 	illNodesIndex.push(d.index);
+	
+	var newNe = society.nodes[d.index].links;
+	for(var i=0; i<newNe.length; i++) {
+		illNodesNe.push(newNe[i]);
+	}
 });
 
 
 setInterval(function(){ 
 
-	var sadziedzi = []; 
+	console.log(illNodesNe);
 	
-	
-	console.log(society.nodes[0].links)
-	console.log(illNodesIndex);
+	var newNe = [];
+	for(var i=illNodesNe.length; i>=0; i--) {
+		d3.select("#name" + illNodesNe[illNodesNe.length - 1]).attr("class", "node-ill");
+		
+		console.log(illNodesNe[illNodesNe.length - 1]);
+		if(illNodesNe.length > 0)
+			newNe = society.nodes[illNodesNe[illNodesNe.length - 1]].links;
+		
+		illNodesNe.pop();
+	}
+	for(var i=0; i<newNe.length; i++) {
+		illNodesNe.push(newNe[i]);
+	}
 	
 }, 3000);
