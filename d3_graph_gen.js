@@ -19,6 +19,8 @@ var force = d3.layout.force()
 	});
 	
 
+var illNodesIndex = [];
+	
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
@@ -58,20 +60,20 @@ var svg = d3.select("body").append("svg")
     node.attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
   });
+	illNodesIndex = [];
+
+
+	svg.selectAll(".node").on('dblclick' , function(d){ 
+		d3.select("#name" + d.index).attr("class", "node-ill");
+	
+		illNodesIndex.push(d.index);
+});
+
 }
 
-var society = gen_society(5,1,100);
+var society = gen_society(5,2,100);
 f(false, society);
 
-
-var illNodesIndex = [];
-
-
-svg.selectAll(".node").on('dblclick' , function(d){ 
-	d3.select("#name" + d.index).attr("class", "node-ill");
-	
-	illNodesIndex.push(d.index);
-});
 
 setInterval(function(){
 	var newIllNodes=illNodesIndex.slice();
@@ -79,7 +81,7 @@ setInterval(function(){
 		//for every neighbour
 		var current = society.nodes[illNodesIndex[i]];
 		for (var j=0; j<current.links.length;++j) {
-			if (newIllNodes.indexOf(current.links[j])==-1)
+			if (newIllNodes.indexOf(current.links[j])==-1&&Math.random()<0.1)
 				newIllNodes.push(current.links[j]);
 		}
 	}
