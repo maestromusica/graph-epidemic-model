@@ -1,7 +1,7 @@
 
 .node {
   stroke: #fff;
-  stroke-width: 1.5px; 
+  stroke-width: 1.5px;
 }
 
 .node-ill {
@@ -30,4 +30,8 @@ svg {
 	opacity: 1;
 	width: 70px;
 	text-align: right;
+}
+
+.dead-node {
+  opacity: 0.1;
 }
