@@ -64,8 +64,7 @@ var svg = d3.select("body").append("svg")
 
 	svg.selectAll(".node").on('dblclick' , function(d){
 		d3.select("#name" + d.index).attr("class", "node-ill");
-
-		illNodesIndex.push(d.index);
+		nodes[d.index]="ill";
 });
 
 }
@@ -85,36 +84,35 @@ for(var i=0; i<NUM_OF_NODES; i++) {
 
 
 setInterval(function(){
-  var newIllNodes = illNodesIndex.slice();
-
-  for (var i=0;i<illNodesIndex.length;i++) {
-    if(Math.random()<0.4 && nodes[i] == "ill") {
-      d3.select("#name" + newIllNodes[i]).style({opacity: 0.1});
-      nodes[i] == "dead";
-    }
-  }
-
-  for (var i=0;i<illNodesIndex.length;++i) {
-    if(nodes[i] == "dead" || illNodesIndex[i] == -1)
-      continue;
-
-    //for every neighbour
-    var current = society.nodes[illNodesIndex[i]];
-    for (var j=0; j<current.links.length;++j) {
-      if (newIllNodes.indexOf(current.links[j])==-1&&Math.random()<0.7&&nodes[j]=="ok") {
-        newIllNodes.push(current.links[j]);
-      }
-    }
-  }
-
-
-  for (var i=0;i<newIllNodes.length;++i) {
-    if(nodes[i]=="ok") {
-      d3.select("#name" + newIllNodes[i]).attr("class", "node-ill");
-      nodes[i] = "ill";
-    }
-  }
-  illNodesIndex=newIllNodes.slice();
-
-
-}, 1000);
+	var toInfect=[];
+	var toDie=[];
+	for (var i = 0; i < NUM_OF_NODES; ++i) {
+		if  (nodes[i]=="ill") {
+			var curr = society.nodes[i];
+			toDie.push(i);
+			for (var j = 0; j < curr.links.length; ++j) {
+				if (nodes[curr.links[j]]=="ok") {
+					toInfect.push(curr.links[j]);
+				}
+			}
+		}
+	}
+	for (var i = 0; i < toDie.length; ++i) {
+		if (Math.random()<0.1) {
+			//DIE
+			nodes[toDie[i]]="dead";
+			d3.select("#name" + toDie[i]).style({opacity: 0.1});
+		} else if (Math.random()<0.8) {
+			//OR LIVE FOREVER
+			nodes[toDie[i]]="resurrected";
+			d3.select("#name" + toDie[i]).style({stroke: "#000"});
+		}
+	}
+	for (var i = 0; i < toInfect.length; ++i) {
+		if (Math.random()<0.9) {
+			//STRUGGLE
+			nodes[toInfect[i]]="ill";
+			d3.select("#name" + toInfect[i]).style({stroke: "#f00"});
+		}
+	}
+}, 2000);
