@@ -3,7 +3,7 @@
 var width = $(window).width(),
     height = $(window).height();
 
-	
+
 var color = d3.scale.category10();
 
 var force = d3.layout.force()
@@ -17,10 +17,10 @@ var force = d3.layout.force()
 		if (d.value==2) return 1.0;
 		else return 0.1;
 	});
-	
+
 
 var illNodesIndex = [];
-	
+
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
@@ -62,30 +62,57 @@ var svg = d3.select("body").append("svg")
   });
 	illNodesIndex = [];
 
-	svg.selectAll(".node").on('dblclick' , function(d){ 
+	svg.selectAll(".node").on('dblclick' , function(d){
 		d3.select("#name" + d.index).attr("class", "node-ill");
-	
-		illNodesIndex.push(d.index);
+		nodes[d.index]="ill";
 });
 
 }
 
-var society = gen_society(5,2,100);
+var NUM_OF_NODES = 100;
+var society = gen_society(5,2,NUM_OF_NODES);
 f(false, society);
+
+// ok - healthy
+// ill - infected
+// dead - well...
+var nodes = [];
+
+for(var i=0; i<NUM_OF_NODES; i++) {
+  nodes[i] = "ok";
+}
 
 
 setInterval(function(){
-	var newIllNodes=illNodesIndex.slice();
-	for (var i=0;i<illNodesIndex.length;++i) {
-		//for every neighbour
-		var current = society.nodes[illNodesIndex[i]];
-		for (var j=0; j<current.links.length;++j) {
-			if (newIllNodes.indexOf(current.links[j])==-1&&Math.random()<0.1)
-				newIllNodes.push(current.links[j]);
+	var toInfect=[];
+	var toDie=[];
+	for (var i = 0; i < NUM_OF_NODES; ++i) {
+		if  (nodes[i]=="ill") {
+			var curr = society.nodes[i];
+			toDie.push(i);
+			for (var j = 0; j < curr.links.length; ++j) {
+				if (nodes[curr.links[j]]=="ok") {
+					toInfect.push(curr.links[j]);
+				}
+			}
 		}
 	}
-	for (var i=0;i<newIllNodes.length;++i)
-		d3.select("#name" + newIllNodes[i]).attr("class", "node-ill");
-	illNodesIndex=newIllNodes;
-}, 1000);
-
+	for (var i = 0; i < toDie.length; ++i) {
+		if (Math.random()<0.1) {
+			//DIE
+			nodes[toDie[i]]="dead";
+			d3.select("#name" + toDie[i]).style({opacity: 0.1});
+		} else if (Math.random()<0.8) {
+			//OR LIVE FOREVER
+			nodes[toDie[i]]="resurrected";
+			d3.select("#name" + toDie[i]).style({stroke: "#000"});
+		}
+	}
+	for (var i = 0; i < toInfect.length; ++i) {
+		if (Math.random()<0.9) {
+			//STRUGGLE
+			nodes[toInfect[i]]="ill";
+			d3.select("#name" + toInfect[i]).style({stroke: "#f00"});
+		}
+	}
+}, 2000);
