@@ -62,7 +62,6 @@ var svg = d3.select("body").append("svg")
   });
 	illNodesIndex = [];
 
-
 	svg.selectAll(".node").on('dblclick' , function(d){ 
 		d3.select("#name" + d.index).attr("class", "node-ill");
 	
