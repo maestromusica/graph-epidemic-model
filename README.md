@@ -1,4 +1,4 @@
-# graph-epidemia-model
+# graph-epidemic-model
 
 This "Epidemic Simulator" simulates epidemic outbreak. Our code uses Barabási–Albert model to create a representation of a group of people.
 
